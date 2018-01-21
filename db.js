@@ -20,11 +20,11 @@ const Users = db.define('users', {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
-    }
+    },
     password: {
         type: Sequelize.STRING,
         allowNull: true
-    },
+    }
     
 })
 
