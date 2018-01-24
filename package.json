@@ -4,13 +4,14 @@
   "description": "socialize- the web app created using html5,bootstrap,vue,node.js and mongodb",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leoking-crey/webdev_project.git"
   },
-  "author": "",
+  "author": "abhinav jha",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/leoking-crey/webdev_project/issues"
@@ -22,5 +23,6 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^4.30.2"
-  }
+  },
+  "devDependencies": {}
 }

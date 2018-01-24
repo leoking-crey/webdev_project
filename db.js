@@ -23,7 +23,7 @@ const Users = db.define('users', {
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     }
     
 })
