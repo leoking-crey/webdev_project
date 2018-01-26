@@ -1,11 +1,44 @@
 const express = require('express')
 const session = require('express-session')
 const passport = require('passport')
+const path = require('path')
+const socketio = require('socket.io')
+const http = require('http')
 
 const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
 
-const http = require('http')
-const io = require('socket.io')
+var usersockets = {}
+
+app.use('/', express.static(path.join(__dirname, 'chat')))
+
+io.on('connection', (socket) => {
+    console.log("New socket formed from " + socket.id)
+    socket.emit('connected')
+
+    socket.on('login', (data) => {
+        // username is in data.user
+        usersockets[data.username] = socket.id
+        console.log(usersockets)
+    })
+    
+    socket.on('send_msg', (data) => {
+        // if we use io.emit, everyone gets it
+        // if we use socket.broadcast.emit, only others get it
+        if (data.message.startsWith('@')) {
+            //data.message = "@a: hello"
+            // split at :, then remove @ from beginning
+            var recipient = data.message.split(':')[0].substr(1)
+            var rcptSocket = usersockets[recipient]
+            io.to(rcptSocket).emit('recv_msg', data)
+        } else {
+           // socket.broadcast.emit('recv_msg', data)  
+           io.emit('recv_msg',data)          
+        }
+    })
+
+})
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -21,11 +54,5 @@ app.use(passport.session())
 // app.use('/', require('./routes/root'))
 
 
-const server = http.Server(app)
-//     function(request, response) {
-//     response.writeHeader(200, {“Content-Type”: “text/html”});
-//     response.write(index);
-//     response.end();
-//   })
-const socket = io.listen(server);
+
 server.listen(5898, () => console.log("Server running on http://localhost:5898"))
