@@ -9,9 +9,28 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+app.use('/', express.static(path.join(__dirname, 'intro')))
+
+app.use(session({
+    secret: 'project-session'
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
+// app.use('/public', require('/routes/public'))
+// app.use('/private', require('./routes/private'))
+// app.use('/', require('./routes/root'))
+
+ app.use('/login', express.static(path.join(__dirname, 'chat')))
+ 
+
+
 var usersockets = {}
 
-app.use('/', express.static(path.join(__dirname, 'chat')))
+
 
 io.on('connection', (socket) => {
     console.log("New socket formed from " + socket.id)
@@ -39,20 +58,6 @@ io.on('connection', (socket) => {
     })
 
 })
-
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
-app.use(session({
-    secret: 'project-session'
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-
-// app.use('/public', require('./routes/public'))
-// app.use('/private', require('./routes/private'))
-// app.use('/', require('./routes/root'))
-
 
 
 server.listen(5898, () => console.log("Server running on http://localhost:5898"))
