@@ -1,19 +1,19 @@
-let socket = io();
+const socket = io();
 socket.on('connected', (data) => {
     console.log("Connected " + socket.id)
     
 })
 
 $(function () {
-    let msglist = $('#msglist')
-    let sendbtn = $('#sendmsg')
-    let msgbox = $('#msgbox')
-    let loginbox = $('#loginbox')
-    let loginbtn = $('#loginbtn')
-    let loginDiv = $('#login-div')
-    let chatDiv = $('#chat-div')
+    const msglist = $('#msglist')
+    const sendbtn = $('#sendmsg')
+    const msgbox = $('#msgbox')
+    const loginbox = $('#loginbox')
+    const loginbtn = $('#loginbtn')
+    const loginDiv = $('#login-div')
+    const chatDiv = $('#chat-div')
 
-    let user = ''
+    const user = ''
 
     sendbtn.click(function () {
         socket.emit('send_msg', {
