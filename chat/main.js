@@ -1,6 +1,7 @@
 let socket = io();
-socket.on('connected', () => {
+socket.on('connected', (data) => {
     console.log("Connected " + socket.id)
+    
 })
 
 $(function () {
