@@ -8,10 +8,31 @@ route.get('/login', (req, res) => {
 route.get('/signup', (req, res) => {
     res.render('signup')
 })
-route.post('/login', passport.authenticate('local', {
-    failureRedirect: '/',
-    successRedirect: '../chat'
-}))
+// route.post('/login', passport.authenticate('local', {
+//     failureRedirect: '/',
+//     successRedirect: '../chat'
+
+// }))
+route.post(
+    '/login', 
+    passport.authenticate('local', {
+        failureRedirect: '/', 
+        failureFlash: false, 
+        badRequestMessage: 'Please enter your account credentials to login.'
+    }), 
+    function(req, res) {
+        console.log(req.param('remember'));
+        if(req.isAuthenticated(req, res)) {
+            res.redirect('../chat');
+        } else {
+            var errors = req.flash('error');
+            if(errors) {
+                assign['errors'] = errors;
+            }
+            res.render('index.html', {errors: errors});
+        }
+    }
+);
 
 route.post('/signup', (req, res) => {
     Users.create ({
