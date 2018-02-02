@@ -1,2 +1,2 @@
 # webdev_project
-socialize- the web app created using html5,bootstrap,vue,node.js and mongodb
+socialize- the web app created using html5,bootstrap,node.js,passport,socket.io,sequelize and mongodb
