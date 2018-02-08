@@ -16,9 +16,10 @@ route.get('/signup', (req, res) => {
 route.post(
     '/login', 
     passport.authenticate('local', {
+        successRedirect: '../chat',
         failureRedirect: '/', 
-        failureFlash: false, 
-        badRequestMessage: 'Please enter your account credentials to login.'
+       failureFlash: false, 
+       badRequestMessage: 'Please enter your account credentials to login.'
     }), 
     function(req, res) {
         console.log(req.param('remember'));
