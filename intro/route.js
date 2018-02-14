@@ -1,6 +1,15 @@
-const route = require('express').Router()
-const Users = require('../db').Users()
-const passport = require('passport-local')
+var express = require('express')
+var route = express()
+var bodyparser = require('body-parser')
+var Users = require('../db').Users()
+var passport = require('passport-local')
+
+route.use(bodyParser.urlencoded({
+    extended: false;
+ }));
+ 
+ route.use(bodyParser.json());
+
 
 route.get('/login', (req, res) => {
     res.render('login')
@@ -46,4 +55,6 @@ route.post('/signup', (req, res) => {
     })
 })
 
-exports = module.exports = route;
+module.exports.route = route;
+
+route.listen(5898);
