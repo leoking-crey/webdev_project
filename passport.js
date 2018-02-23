@@ -2,6 +2,8 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Users = require('./db').Users
 
+module.exports = function(passport)
+{
 passport.serializeUser(function (user, done) {
     done(null, user.username)
 })
@@ -19,7 +21,7 @@ passport.deserializeUser(function (username, done) {
     })
 })
 
-passport.use(new LocalStrategy(function (username, password, done) {
+passport.use('local-signup',new LocalStrategy(function (username, password, done) {
     Users.findOne({
         where: {
             username: username
@@ -36,5 +38,8 @@ passport.use(new LocalStrategy(function (username, password, done) {
         return done(err)
     })
 }))
+    
+}
 
-exports = module.exports = passport
+
+//exports = module.exports = passport
