@@ -1,14 +1,20 @@
 const Sequelize = require('sequelize');
 
 const db = new Sequelize(
-    'userdb',
-    'userdb',
-    'userdb',
+    'socializedb',
+    'soc',
+    'socpass',
     {
         dialect: 'mysql',
-        host: 'localhost'
+        host: 'localhost',
+        pool:{
+            max:8,
+            min:0,
+            aquire:30000,
+            idle:10000
+        },
     }
-)
+);
 
 const Users = db.define('users', {
     email: {

@@ -4,10 +4,11 @@ app.get('/', function(req, res) {
         res.render('index'); // load the index.ejs file
     });
 app.get('/signup', function(req,res) {
-    res.send("This is signed up !");
+    res.render('index');
+   // res.successRedirect('../chat');
 })
 app.get('/profile', function(req,res) {
-    res.send("This is signed up profile!");
+    res.render('../chat/index.html');
 })
 
 app.post('/signup', passport.authenticate('local-signup', {
@@ -16,3 +17,7 @@ app.post('/signup', passport.authenticate('local-signup', {
     }));    
 }
 
+app.post('/login', passport.authenticate('local-login',{
+    successRedirect : '/profile',
+    failureRedirect : '/signup'
+}));

@@ -5,7 +5,7 @@ var Users = require('../db').Users()
 var passport = require('passport-local')
 
 route.use(bodyParser.urlencoded({
-    extended: false;
+    extended: false,
  }));
  
  route.use(bodyParser.json());
