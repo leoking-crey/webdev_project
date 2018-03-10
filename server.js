@@ -9,8 +9,9 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 const bodyParser   = require('body-parser');
-
-
+const ejs = require('ejs')
+app.set('view engine','html');
+app.engine('html',ejs.renderFile);
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use(bodyParser());
 require('./passport')(passport);
