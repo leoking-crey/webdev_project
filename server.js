@@ -12,11 +12,13 @@ const bodyParser   = require('body-parser');
 const ejs = require('ejs')
 app.set('view engine','html');
 app.engine('html',ejs.renderFile);
+app.set('views',__dirname + '/chat/index');
+
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use(bodyParser());
 require('./passport')(passport);
 require('./app/routes.js')(app, passport);
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 
 
 app.use(session({
