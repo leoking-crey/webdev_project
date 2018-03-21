@@ -8,6 +8,7 @@ const http = require('http')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
+const cookieparser = require('cookie-parser')
 const bodyParser   = require('body-parser');
 const ejs = require('ejs')
 app.set('views',path.join(__dirname , 'chat'));
@@ -17,9 +18,10 @@ app.set('view engine','html');
 
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use('/profile', express.static(path.join(__dirname, 'chat')));
-app.use(bodyParser());
+//app.use(bodyParser());
 require('./passport')(passport);
 require('./app/routes.js')(app, passport);
+app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 
