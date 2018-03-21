@@ -10,11 +10,13 @@ const server = http.createServer(app)
 const io = socketio(server)
 const bodyParser   = require('body-parser');
 const ejs = require('ejs')
+app.set('views',path.join(__dirname , 'chat'));
+
 app.set('view engine','html');
-app.engine('html',ejs.renderFile);
-app.set('views',__dirname + '/chat/index');
+//app.engine('html',ejs.renderFile);
 
 app.use('/', express.static(path.join(__dirname, 'intro')));
+app.use('/profile', express.static(path.join(__dirname, 'chat')));
 app.use(bodyParser());
 require('./passport')(passport);
 require('./app/routes.js')(app, passport);
