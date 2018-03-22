@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="font-awesome.min.css">
   <link rel="shortcut icon" href="icons8-bot-50.png">
+  <script src="../app/routes.js"></script>
 </head>
 
 <body>
@@ -86,20 +87,20 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="/signup">
+        <form method="post" action="/signup">
           <div class="modal-body">
             <div class="form-group">
               <label for="Email signup">Email address</label>
-              <input type="email" name="email" class="form-control" id="Email signup" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label for="username signup">Username</label>
-              <input type="text" name="username" class="form-control" id="username signup" placeholder="Username">
+              <input type="text" name="username" class="form-control" id="username" placeholder="Username">
             </div>
             <div class="form-group">
               <label for="Password signup">Password</label>
-              <input type="password" name="password" class="form-control" id="Password signup" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="password" placeholder="Password">
             </div>
           </div>
           <div class="modal-footer">

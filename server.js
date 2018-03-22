@@ -36,7 +36,7 @@ app.use(passport.session())
 // app.use('/private', require('./routes/private'))
 // app.use('/', require('./routes/root'))
 
- app.use('/login', express.static(path.join(__dirname, 'chat')))
+ //app.use('/login', express.static(path.join(__dirname, 'chat')))
 
 var usersockets = {}
 
