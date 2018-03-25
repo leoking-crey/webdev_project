@@ -14,9 +14,11 @@ module.exports = function(app,passport)
 //         successRedirect : '/profile', // redirect to the secure profile section
 //         failureRedirect : '/' // redirect back to the signup page if there is an error
 //     })); 
-app.get('/signup', function(req,res) {
-    res.render('../intro/index');
-})   
+app.use((bodyParser.urlencoded({ extended: false })))
+app.use(bodyParser.json());
+ app.get('/signup', function(req,res) {
+     res.render('../intro/index');
+ })   
 app.post('/signup', function(req,res){
     Users.findOne({
        where: { email: req.body.email,
@@ -25,8 +27,13 @@ app.post('/signup', function(req,res){
        }
     }).then(function(user) {
         if (user) return {message: 'User already exists'};
-      Users.create(req.allParams());
-    })    
+      })
+    Users.create({
+        where: { email: req.body.email,
+            username: req.body.username,
+            password: req.body.password,
+           }
+      });    
     res.redirect('/profile')
 })
 
