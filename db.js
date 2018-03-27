@@ -19,20 +19,18 @@ const db = new Sequelize(
 const Users = db.define('users', {
     email: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
         unique: true,
         defaultValue: "abhinav@gmail.com"
     },
     username: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
         unique: true,
-        defaultValue: null
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: true,
-        defaultValue: null
+        allowNull: false,
     }
     
 })

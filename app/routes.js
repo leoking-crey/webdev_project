@@ -20,26 +20,31 @@ app.use(bodyParser.json());
      res.render('../intro/index');
  })   
 app.post('/signup', function(req,res){
+    var a = [req.body.email,req.body.username,req.body.password];
     Users.findOne({
-       where: { email: req.body.email,
-        username: req.body.username,
-        password: req.body.password,
+       where: { email: a[0],
+        username: a[1],
+        password: a[2],
        }
-    }).then(function(user) {
-        if (user) return {message: 'User already exists'};
-      })
+       
+    }).then(users => {
+        if (users) return {message: 'User already exists'};
+        res.redirect('/')
+    })
     Users.create({
-        where: { email: req.body.email,
-            username: req.body.username,
-            password: req.body.password,
-           }
-      });    
-    res.redirect('/profile')
+            email: a[0],
+            username: a[1],
+            password: a[2],
+           
+      }).then(users => {
+            res.redirect('/profile')
+      })    
+    
 })
 
-app.post('/login', passport.authenticate('local-login',{
+app.post('/login', passport.authenticate('local',{
     successRedirect : '/profile',
-    failureRedirect : '/'
+    failureRedirect : '/',
 }));
 
 // app.get('/profile',() => console.log("d"), function(req,res) {

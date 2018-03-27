@@ -4,20 +4,20 @@ const Users = require('./db').Users
 
 module.exports = function(passport)
 {
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function (users, done) {
     console.log("Serialize");
-    done(null, user.email)
+    done(null, users.username)
 })
 
-passport.deserializeUser(function (email, done) {
+passport.deserializeUser(function (username, done) {
     console.log("DeSerialize");
     Users.findOne({
-        email: email
-    }).then((user) => {
-        if (!user) {
+        username: username
+    }).then((users) => {
+        if (!users) {
             return done(new Error("No such user"))
         }
-        return done(null, user)
+        return done(null, users)
     }).catch((err) => {
         done(err)
     })
@@ -42,25 +42,26 @@ passport.deserializeUser(function (email, done) {
 //     })
 // }))
     
-passport.use('local-login',new LocalStrategy(function (email, password, done) {
-    console.log("ZD");
-    Users.findOne({
-        where: {
-            email: req.body.email
-        }
-    }).then((user) => {
-        if (!user) {
-            return done(null, false, {message: "No such user"})
-        }
-        if (user.password !== password) {
-            return done(null, false, {message: "Wrong password"})
-        }
-        return done(null, user)
-    }).catch((err) => {
-        return done(err)
-    })
-}))
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+   },
+    function(username, password, done) {
+      Users.findOne({ username: username },
+        function(err, users) {
+            if (err) { return done(err); }
+            if (!users) {
+            return done(null, false, { message: 'Incorrect username.' });
+            }
+            if (!users.validPassword(password)) {
+            return done(null, false, { message: 'Incorrect password.' });
+            }
+            return done(null, users);
+        });
+    }
+));
+   
 }
 
 
-//exports = module.exports = passport
+
