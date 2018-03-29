@@ -15,7 +15,7 @@ app.set('views',path.join(__dirname , 'chat'));
 
 app.set('view engine','html');
 //app.engine('html',ejs.renderFile);
-
+app.set('port',process.env.PORT || 5898);
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use('/profile', express.static(path.join(__dirname, 'chat')));
 //app.use(bodyParser());
@@ -44,9 +44,9 @@ io.on('connection', (socket) => {
     console.log("New socket formed from " + socket.id)
     socket.emit('connected')
 
-    socket.on('login', (data) => {
+    socket.on(true, (data) => {
         // username is in data.user
-        usersockets[data.username] = socket.id
+        usersockets[data.user] = socket.id
         console.log(usersockets)
     })
     
@@ -68,4 +68,4 @@ io.on('connection', (socket) => {
 })
 
 
-app.listen(5898, () => console.log("Server running on http://localhost:5898"))
+app.listen(app.get(port), () => console.log("Server running on http://localhost"))

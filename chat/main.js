@@ -1,4 +1,5 @@
 const socket = io();
+var arr = require('../app/routes.js')
 socket.on('connected', (data) => {
     console.log("Connected " + socket.id)
     
@@ -17,19 +18,19 @@ $(function () {
 
     sendbtn.click(function () {
         socket.emit('send_msg', {
-            user: user,
+            user: arr.a[1],
             message: msgbox.val()
         })
     })
 
-    loginbtn.click(function () {
-        user = loginbox.val()
-        chatDiv.show()
-        loginDiv.hide()
-        socket.emit('login', {
-            user: user
-        })
-    })
+    // loginbtn.click(function () {
+    //     user = loginbox.val()
+    //     chatDiv.show()
+    //     loginDiv.hide()
+    //     socket.emit('login', {
+    //         user: user
+    //     })
+    // })
 
     socket.on('recv_msg', function (data) {
         msglist.append($('<li>' + data.user + ': ' + data.message + '</li>'))

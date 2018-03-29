@@ -1,3 +1,5 @@
+import { Module } from 'module';
+
 const express = require('express')
 const app = express();
 const path = require('path');
@@ -21,6 +23,7 @@ app.use(bodyParser.json());
  })   
 app.post('/signup', function(req,res){
     var a = [req.body.email,req.body.username,req.body.password];
+    exports.a = a;
     Users.findOne({
        where: { email: a[0],
         username: a[1],
