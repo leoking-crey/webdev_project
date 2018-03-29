@@ -15,7 +15,7 @@ app.set('views',path.join(__dirname , 'chat'));
 
 app.set('view engine','html');
 //app.engine('html',ejs.renderFile);
-app.set('port',process.env.PORT || 5898);
+var port = process.env.PORT || 5898;
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use('/profile', express.static(path.join(__dirname, 'chat')));
 //app.use(bodyParser());
@@ -68,4 +68,4 @@ io.on('connection', (socket) => {
 })
 
 
-app.listen(app.get(port), () => console.log("Server running on http://localhost"))
+app.listen(port, () => console.log("Server running on http://localhost:5898"))

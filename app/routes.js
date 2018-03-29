@@ -1,4 +1,4 @@
-import { Module } from 'module';
+//import { Module } from 'module';
 
 const express = require('express')
 const app = express();
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
  })   
 app.post('/signup', function(req,res){
     var a = [req.body.email,req.body.username,req.body.password];
-    exports.a = a;
+    // exports.a = a;
     Users.findOne({
        where: { email: a[0],
         username: a[1],
@@ -31,8 +31,10 @@ app.post('/signup', function(req,res){
        }
        
     }).then(users => {
-        if (users) return {message: 'User already exists'};
+        if (users) {
+        return {message: 'User already exists'};
         res.redirect('/')
+        }
     })
     Users.create({
             email: a[0],
@@ -41,6 +43,7 @@ app.post('/signup', function(req,res){
            
       }).then(users => {
             res.redirect('/profile')
+            return {message: 'User logged In'};
       })    
     
 })

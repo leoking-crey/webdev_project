@@ -1,5 +1,5 @@
 const socket = io();
-var arr = require('../app/routes.js')
+//var arr = require('./app/routes.js')(app,passport)
 socket.on('connected', (data) => {
     console.log("Connected " + socket.id)
     
