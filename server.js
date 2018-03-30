@@ -23,14 +23,14 @@ require('./passport')(passport);
 require('./app/routes.js')(app, passport);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(session({
     secret: 'project-session'
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 // app.use('/public', require('/routes/public'))
 // app.use('/private', require('./routes/private'))
@@ -44,18 +44,16 @@ io.on('connection', (socket) => {
     console.log("New socket formed from " + socket.id)
     socket.emit('connected')
 
-    socket.on(true, (data) => {
-        // username is in data.user
-        usersockets[data.user] = socket.id
-        console.log(usersockets)
-    })
+    // socket.on(true, (data) => {
+    //     // username is in data.user
+    //     usersockets[socket.id] = data.user
+    //     console.log(usersockets)
+    // })
     
     socket.on('send_msg', (data) => {
         // if we use io.emit, everyone gets it
         // if we use socket.broadcast.emit, only others get it
         if (data.message.startsWith('@')) {
-            //data.message = "@a: hello"
-            // split at :, then remove @ from beginning
             var recipient = data.message.split(':')[0].substr(1)
             var rcptSocket = usersockets[recipient]
             io.to(rcptSocket).emit('recv_msg', data)

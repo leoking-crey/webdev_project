@@ -1,4 +1,3 @@
-const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Users = require('./db').Users
 
@@ -9,10 +8,10 @@ passport.serializeUser(function (users, done) {
     done(null, users.username)
 })
 
-passport.deserializeUser(function (username, done) {
+passport.deserializeUser(function (users, done) {
     console.log("DeSerialize");
     Users.findOne({
-        username: username
+        username: users.username
     }).then((users) => {
         if (!users) {
             return done(new Error("No such user"))
@@ -42,10 +41,7 @@ passport.deserializeUser(function (username, done) {
 //     })
 // }))
     
-passport.use(new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-   },
+passport.use(new LocalStrategy(
     function(username, password, done) {
       Users.findOne({ username: username },
         function(err, users) {

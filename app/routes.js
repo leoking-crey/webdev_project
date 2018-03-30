@@ -32,8 +32,8 @@ app.post('/signup', function(req,res){
        
     }).then(users => {
         if (users) {
-        return {message: 'User already exists'};
         res.redirect('/')
+        return {message: 'User already exists'};
         }
     })
     Users.create({
@@ -51,6 +51,8 @@ app.post('/signup', function(req,res){
 app.post('/login', passport.authenticate('local',{
     successRedirect : '/profile',
     failureRedirect : '/',
+    
+    
 }));
 
 // app.get('/profile',() => console.log("d"), function(req,res) {

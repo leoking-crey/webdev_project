@@ -15,4 +15,6 @@ body{
    color: white;
      text-shadow: -3px 13px 10px rgba(0,0,0,0.8)
   }
-  
+#msgbox{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}  
