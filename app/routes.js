@@ -55,6 +55,7 @@ app.post('/login', passport.authenticate('local',{
     
 }));
 
+
 // app.get('/profile',() => console.log("d"), function(req,res) {
 //     res.sendHTML(path.join(__dirname,'../chat'));
 // });

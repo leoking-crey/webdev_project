@@ -1,25 +1,29 @@
+const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Users = require('./db').Users
-
+//var arr = require('/app/routes.js').a;
 module.exports = function(passport)
 {
 passport.serializeUser(function (users, done) {
     console.log("Serialize");
-    done(null, users.username)
+    done(null, users.id)
 })
+function findById(id, fn) {
+    User.findOne(id).exec(function (err, user) {
 
-passport.deserializeUser(function (users, done) {
+    if (err) {
+     return fn(null, null);
+    } else {
+     return fn(null, user);
+   }
+    });
+ }
+passport.deserializeUser(function (id, done) {
     console.log("DeSerialize");
-    Users.findOne({
-        username: users.username
-    }).then((users) => {
-        if (!users) {
-            return done(new Error("No such user"))
-        }
-        return done(null, users)
-    }).catch((err) => {
-        done(err)
-    })
+    findById(id, function (err, user) {
+        console.log(user);
+        done(err, user);
+      });
 })
 
 // passport.use('local-signup',new LocalStrategy(function (username, password, done) {

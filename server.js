@@ -23,14 +23,14 @@ require('./passport')(passport);
 require('./app/routes.js')(app, passport);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 app.use(session({
     secret: 'project-session'
 }))
 
-
+app.use(passport.initialize())
+app.use(passport.session())
 
 // app.use('/public', require('/routes/public'))
 // app.use('/private', require('./routes/private'))
