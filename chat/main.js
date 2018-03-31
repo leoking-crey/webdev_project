@@ -23,15 +23,6 @@ $(function () {
         })
     })
 
-    // loginbtn.click(function () {
-    //     user = loginbox.val()
-    //     chatDiv.show()
-    //     loginDiv.hide()
-    //     socket.emit('login', {
-    //         user: user
-    //     })
-    // })
-
     socket.on('recv_msg', function (data) {
         msglist.append($('<li>' + data.user + ': ' + data.message + '</li>'))
     })
