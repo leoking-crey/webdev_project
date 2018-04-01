@@ -1,16 +1,34 @@
 $(function(){
-    const email = ('#ExampleInputEmail1')
-    const username = ('#formGroupExampleInput2')
-    const password = ('#ExampleInputPassword1')
-    const signup = ('#btn1')
-    signup.onclick(){
-        const var1 = email.val()
-        const var2 = username.val()
-        const var3 = password.val()
-        $.post('./route',{task:newuser},function(){
-
+    const submit = $('#submit');
+    const save = $('#save');
+    const email = $('#email');
+    const username = $('#username');
+    const password = $('#password');
+    const userlogin = $('#Username login');
+    const passlogin = $('#Password login');
+    save.click(function(e){
+        e.preventDefault();
+        $.post('/signup',{
+            email:email.val(),
+            username:username.val(),
+            password:password.val()
+        }, function(data){
+            console.log(1)
+            if(data.username){
+            localStorage.setItem("username",data.username)
+            }
+            window.location.href(data.url)
         })
-    }
+    })
+    submit.click(function(e){
+        e.preventDefault();
+        $.post('/login',{
+            username:userlogin.val(),
+            password:passlogin.val()
+        }, function(data){
+            window.location.href(data.url)
+        })
+    })
     
 
 })

@@ -1,5 +1,5 @@
 const socket = io();
-var arr = require('./app/routes.js')
+
 socket.on('connected', (data) => {
     console.log("Connected " + socket.id)
     
@@ -15,10 +15,11 @@ $(function () {
     const chatDiv = $('#chat-div')
 
     const user = ''
-
+    
+    
     sendbtn.click(function () {
         socket.emit('send_msg', {
-            user: arr.a[1],
+            user: localStorage.getItem("username"),
             message: msgbox.val()
         })
     })

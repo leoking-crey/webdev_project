@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="font-awesome.min.css">
   <link rel="shortcut icon" href="icons8-bot-50.png">
   <script src="../app/routes.js"></script>
+  <script src="index.js"></script>
 </head>
 
 <body>
@@ -73,7 +74,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="post" action="/signup">
+        <form >
           <div class="modal-body">
             <div class="form-group">
               <label for="Email signup">Email address</label>
@@ -91,7 +92,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" id="btn1" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success" id="save">Save</button>
           </div>
         </form>
       </div>
@@ -108,7 +109,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="/login">
+        <form >
           <div class="modal-body">
             <div class="form-group">
               <label for="Username login">Username</label>
@@ -121,7 +122,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button class="btn btn-success" id="submit">Submit</button>
           </div>
         </form>
       </div>

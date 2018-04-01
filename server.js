@@ -17,11 +17,11 @@ app.set('view engine','html');
 var port = process.env.PORT || 5898;
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use('/profile', express.static(path.join(__dirname, 'chat')));
-app.use(bodyParser());
+//app.use(bodyParser());
 require('./passport')(passport);
 require('./app/routes.js')(app, passport);
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+//app.use(express.urlencoded({extended: true}))
 
 
 app.use(session({
@@ -53,4 +53,4 @@ io.on('connection', (socket) => {
 })
 
 
-app.listen(port, () => console.log("Server running on http://localhost:5898"))
+server.listen(port, () => console.log("Server running on http://localhost:5898"))
