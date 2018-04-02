@@ -16,7 +16,9 @@ app.use(bodyParser.json());
      res.render('../intro/index');
  }) 
  app.get('/login',function(req,res){
-     res.render('../intro/index')
+     res.send({
+         username: req.body.username
+     })
  }) 
   
 app.post('/signup', function(req,res){
@@ -60,8 +62,9 @@ app.post('/signup', function(req,res){
 //     .catch((err) => res.send(err)); 
 // })
 app.post('/login', passport.authenticate('local',{
-    successRedirect : '/profile',
+    successRedirect : '/auth',
     failureRedirect : '/',
+    
 }));
 app.get('/logout', function(req, res){
     req.logout();

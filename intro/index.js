@@ -4,8 +4,8 @@ $(function(){
     const email = $('#email');
     const username = $('#username');
     const password = $('#password');
-    const userlogin = $('#Username login');
-    const passlogin = $('#Password login');
+    const userlogin = $('#Userlogin');
+    const passlogin = $('#Passlogin');
     save.click(function(e){
         e.preventDefault();
         $.post('/signup',{

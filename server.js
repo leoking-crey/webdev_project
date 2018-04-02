@@ -38,8 +38,12 @@ var usersockets = {}
 io.on('connection', (socket) => {
     console.log("New socket formed from " + socket.id)
     socket.emit('connected')
-
     
+    socket.on('draw', (data) => {
+          console.log(data);
+          io.emit('draw', data);
+    })
+        
     socket.on('send_msg', (data) => {
         if (data.message.startsWith('@')) {
             var recipient = data.message.split(':')[0].substr(1)

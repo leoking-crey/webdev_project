@@ -35,11 +35,15 @@
         </ul>
       
     </nav>
-    
-    <div id="chat-div">
-        <input placeholder="new message" type="text" id="msgbox">
-        <button id="sendmsg">SEND</button>
-        <div class = "row col-xs-12 col-md-8"><ul id="msglist"></ul></div>
+    <div class="row">
+      <div class = "col-4" id="chat-div">
+          <input placeholder="new message" type="text" id="msgbox">
+          <button id="sendmsg">SEND</button>
+          <ul id="msglist"></ul>
+      </div>
+      <div class = "col-8">
+        <canvas id="canvas"></canvas>
+      </div>
     </div>
 </body>
 </html>
