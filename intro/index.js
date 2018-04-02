@@ -17,18 +17,18 @@ $(function(){
             if(data.username){
             localStorage.setItem("username",data.username)
             }
-            window.location.href(data.url)
+            window.location.href = data.url
         })
     })
-    submit.click(function(e){
-        e.preventDefault();
-        $.post('/login',{
-            username:userlogin.val(),
-            password:passlogin.val()
-        }, function(data){
-            window.location.href(data.url)
-        })
-    })
+    // submit.click(function(e){
+    //     e.preventDefault();
+    //     $.post('/login',{
+    //         username:userlogin.val(),
+    //         password:passlogin.val()
+    //     }, function(data){
+    //         window.location.href = data.url
+    //     })
+    // })
     
 
 })
