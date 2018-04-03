@@ -52,20 +52,14 @@ app.post('/signup', function(req,res){
     
    
 })
-// app.get('/var/',function(req,res){
-//     Users.findOne({
-//         where:{
-//             username:localStorage.getItem("username")
-//         }
-//     })
-//     .then((users) => res.send(users))
-//     .catch((err) => res.send(err)); 
-// })
-app.post('/login', passport.authenticate('local',{
-    successRedirect : '/auth',
-    failureRedirect : '/',
-    
-}));
+app.post('/login', passport.authenticate('local'),
+function(req, res) {
+    res.send({
+        url:'/profile',
+        username:req.body.username
+    });
+  });
+
 app.get('/logout', function(req, res){
     req.logout();
     res.redirect('/');

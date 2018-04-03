@@ -19,7 +19,7 @@ $(function () {
     
     sendbtn.click(function () {
         socket.emit('send_msg', {
-            user: localStorage.getItem("username") || sessionStorage.getItem("username"),
+            user: localStorage.getItem("username"),
             message: msgbox.val()
         })
     })
