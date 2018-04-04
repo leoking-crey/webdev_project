@@ -8,22 +8,19 @@ passport.serializeUser(function (users, done) {
     console.log("Serialize");
     done(null, users.id)
 })
-function findById(id, fn) {
-    User.findOne(id).exec(function (err, user) {
-
-    if (err) {
-     return fn(null, null);
-    } else {
-     return fn(null, user);
-   }
-    });
- }
+// function findById(id, fn) {
+//     Users.findById(id).
+//  }
+//  function (err, users) {
+//     
+//     done(err, users);
+//   });
 passport.deserializeUser(function (id, done) {
     console.log("DeSerialize");
-    findById(id, function (err, user) {
-        console.log(user);
-        done(err, user);
-      });
+    Users.findById(id).then((users) => {
+        console.log(users);
+        return done(null, users);
+    });
 })
 
 passport.use(new LocalStrategy(
@@ -34,7 +31,7 @@ passport.use(new LocalStrategy(
             if (!users) {
             return done(null, false, { message: 'Incorrect username.' });
             }
-            if (!users.validPassword(password)) {
+            if (!users.password === password) {
             return done(null, false, { message: 'Incorrect password.' });
             }
             return done(null, users);
