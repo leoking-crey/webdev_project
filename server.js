@@ -4,6 +4,7 @@ const passport = require('passport')
 const path = require('path')
 const socketio = require('socket.io')
 const http = require('http')
+const port=process.env.PORT || 5100;
 
 const app = express()
 const server = http.createServer(app)
@@ -45,7 +46,7 @@ io.on('connection', (socket) => {
         usersockets[data.username] = socket.id
         console.log(usersockets)
     })
-    
+
     socket.on('send_msg', (data) => {
         // if we use io.emit, everyone gets it
         // if we use socket.broadcast.emit, only others get it
@@ -56,12 +57,12 @@ io.on('connection', (socket) => {
             var rcptSocket = usersockets[recipient]
             io.to(rcptSocket).emit('recv_msg', data)
         } else {
-           // socket.broadcast.emit('recv_msg', data)  
-           io.emit('recv_msg',data)          
+           // socket.broadcast.emit('recv_msg', data)
+           io.emit('recv_msg',data)
         }
     })
 
 })
 
 
-app.listen(5898, () => console.log("Server running on http://localhost:5898"))
+app.listen(port, () => console.log("Server running on http://localhost:5898"))
