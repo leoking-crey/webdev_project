@@ -1,12 +1,13 @@
-const passport = require('passport')
+//const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Users = require('./db').Users
 module.exports = function(passport)
 {
     console.log("passport is working");
 passport.serializeUser(function (users, done) {
+    return done(null, users.id);
     console.log("Serialize");
-    done(null, users.id)
+    
 })
 // function findById(id, fn) {
 //     Users.findById(id).
