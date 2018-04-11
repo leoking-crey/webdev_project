@@ -4,35 +4,44 @@ const db = new Sequelize(
     'socializedb',
     'soc',
     'socpass',
+
     {
         dialect: 'mysql',
         host: 'localhost',
-        pool:{
-            max:8,
-            min:0,
-            aquire:30000,
-            idle:10000
-        },
+        // pool:{
+        //     max:8,
+        //     min:0,
+        //     aquire:30000,
+        //     idle:10000
+        // },
+        operatorsAliases: false,
     }
 );
 
-const Users = db.define('users', {
+const Users = sequelize.define('users', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        defaultValue: "abhinav@gmail.com"
     },
     username: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     }
     
 })
+
 
 db.sync().then(() => console.log("Database is ready"))
 
