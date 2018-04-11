@@ -6,7 +6,7 @@ const route = express.Router()
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport-local');
-const Users = require('../db').Users;
+const Users = require('../models/db').Users;
 module.exports = function(app,passport)
 {
     const token = [];

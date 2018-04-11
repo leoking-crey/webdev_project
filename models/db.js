@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-
+module.exports = function(sequelize,Sequelize){
 const db = new Sequelize(
     'socializedb',
     'soc',
@@ -18,7 +18,7 @@ const db = new Sequelize(
     }
 );
 
-const Users = db.define('users', {
+const Users = sequelize.define('users', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -44,9 +44,5 @@ const Users = db.define('users', {
 
 
 db.sync().then(() => console.log("Database is ready"))
-
-exports = module.exports = {
-    db,
-    Users
 
 }
