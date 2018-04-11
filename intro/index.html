@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
     crossorigin="anonymous">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
@@ -17,6 +19,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="font-awesome.min.css">
   <link rel="shortcut icon" href="icons8-bot-50.png">
+  <script src="../app/routes.js"></script>
+  <script src="index.js"></script>
 </head>
 
 <body>
@@ -33,26 +37,16 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#about">About
           <i class="fa fa-book" aria-hidden="true"></i>
           
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#contact">Contact
           <i class="fa fa-phone" aria-hidden="true"></i>
         </a>
       </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
     </ul>
     <ul class="navbar-nav ml-auto">
 
@@ -72,10 +66,6 @@
   </nav>
   <div class="content">
     <h1>Socialize</h1>
-    <!-- <hr width="200px">
-  <h3><em>Its about the way you communicate</em></h3>
-  <hr width="400px"> -->
-
   </div>
   <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -86,25 +76,25 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="/signup">
+        <form >
           <div class="modal-body">
             <div class="form-group">
               <label for="Email signup">Email address</label>
-              <input type="email" name="email" class="form-control" id="Email signup" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label for="username signup">Username</label>
-              <input type="text" name="username" class="form-control" id="username signup" placeholder="Username">
+              <input type="text" name="username" class="form-control" id="username" placeholder="Username">
             </div>
             <div class="form-group">
               <label for="Password signup">Password</label>
-              <input type="password" name="password" class="form-control" id="Password signup" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="password" placeholder="Password">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" id="btn1" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success" id="save">Save</button>
           </div>
         </form>
       </div>
@@ -121,33 +111,39 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="/login">
+        <form>
           <div class="modal-body">
             <div class="form-group">
-              <label for="Email login">Email address</label>
-              <input type="email" name="email" class="form-control" id="Email login" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <label for="Username login">Username</label>
+              <input type="text" name="username" class="form-control" id="Userlogin" placeholder="Enter username">
             </div>
             <div class="form-group">
               <label for="Password login">Password</label>
-              <input type="password" name="password" class="form-control" id="Password login" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="Passlogin" placeholder="Password">
             </div>
-            <div class="form-check">
-              <input type="checkbox" name="remember" class="form-check-input" id="remember">
-              <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-            </div>
-            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button class="btn btn-success" id="submit">Submit</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-
+  <div class="modal fade" id="about">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique quibusdam iure architecto aliquam molestias doloribus, officia totam at magnam hic eos ratione iusto facere iste delectus neque! Eius, unde? Pariatur!
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="contact">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique quibusdam iure architecto aliquam molestias doloribus, officia totam at magnam hic eos ratione iusto facere iste delectus neque! Eius, unde? Pariatur!
+        </div>
+      </div>
+    </div>
   <script src="../app/routes.js"></script>
 </body>
 

@@ -15,3 +15,8 @@ html{
  color: white;
    text-shadow: -3px 13px 10px rgba(0,0,0,0.8)
 }
+#about #contact{
+  color: transparent;
+  position: static;
+  size: 3vh;
+}
