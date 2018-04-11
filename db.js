@@ -14,6 +14,7 @@ const db = new Sequelize(
         //     aquire:30000,
         //     idle:10000
         // },
+        operatorsAliases: false,
     }
 );
 
