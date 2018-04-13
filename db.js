@@ -18,7 +18,7 @@ const db = new Sequelize(
     }
 );
 
-const Users = sequelize.define('users', {
+const Users = db.define('users', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,

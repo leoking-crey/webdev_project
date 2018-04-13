@@ -25,18 +25,18 @@ passport.deserializeUser(function (id, done) {
 })
 
 passport.use(new LocalStrategy(
-    function(username, password, done) {
-      Users.findOne({where:{ username: username} },
-        function(err, users) {
-            if (err) { return done(err); }
-            if (!users) {
-            return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!users.password === password) {
-            return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, users);
-        });
+    function (username, password, done) {
+        Users.findOne({ where: { username: username } })
+             .then(function (users) {
+                 if (!users) {
+                     return done(null, false, { message: 'Incorrect username.' });
+                 }
+                 if (!users.password === password) {
+                     return done(null, false, { message: 'Incorrect password.' });
+                 }
+                 return done(null, users);
+             })
+             .catch(err => done(err));
     }
 ));
    

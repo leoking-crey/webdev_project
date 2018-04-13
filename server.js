@@ -18,8 +18,6 @@ var port = process.env.PORT || 5898;
 app.use('/', express.static(path.join(__dirname, 'intro')));
 app.use('/profile', express.static(path.join(__dirname, 'chat')));
 //app.use(bodyParser().urlencoded({extended: true}));
-require('./passport')(passport);
-require('./app/routes.js')(app, passport);
 app.use(express.json());
 //app.use(express.urlencoded({extended: true}))
 
@@ -32,13 +30,14 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-var models = require('./models')
-models.sequelize.sync().then(() => {
-    console.log("nice")
-}).catch((err) => {
-    console.log(err)
-});
-var usersockets = {}
+require('./passport')(passport);
+require('./app/routes.js')(app, passport);
+// models.sequelize.sync().then(() => {
+//     console.log("nice")
+// }).catch((err) => {
+//     console.log(err)
+// });
+// var usersockets = {}
 
 io.on('connection', (socket) => {
     console.log("New socket formed from " + socket.id)
