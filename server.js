@@ -4,6 +4,7 @@ const passport = require('passport')
 const path = require('path')
 const socketio = require('socket.io')
 const http = require('http')
+const port=process.env.PORT || 5100;
 
 const app = express()
 const server = http.createServer(app)
@@ -42,7 +43,12 @@ require('./app/routes.js')(app, passport);
 io.on('connection', (socket) => {
     console.log("New socket formed from " + socket.id)
     socket.emit('connected')
-    
+
+    socket.on('login', (data) => {
+        // username is in data.user
+        usersockets[data.username] = socket.id
+        console.log(usersockets)
+    })    
     socket.on('draw', (data) => {
           console.log(data);
           io.emit('draw', data);
@@ -54,11 +60,12 @@ io.on('connection', (socket) => {
             var rcptSocket = usersockets[recipient]
             io.to(rcptSocket).emit('recv_msg', data)
         } else {
-            io.emit('recv_msg',data)          
+           // socket.broadcast.emit('recv_msg', data)
+            io.emit('recv_msg',data);
         }
     })
 
 })
 
 
-server.listen(port, () => console.log("Server running on http://localhost:5898"))
+app.listen(port, () => console.log("Server running on http://localhost:5898"))
